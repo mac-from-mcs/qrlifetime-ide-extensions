@@ -1,0 +1,39 @@
+<idea-plugin>
+    <id>com.qrlifetime.qrcode</id>
+    <name>QRLifetime QR Code Generator</name>
+    <vendor url="https://qrlifetime.com" email="hello@qrlifetime.com">QRLifetime</vendor>
+
+    <description><![CDATA[
+<p>Generate a QR code from a URL or any text without leaving the IDE, then insert it as SVG markup in the current file or save it as an SVG file in your project.</p>
+<p>The QR code is generated locally with the open-source Nayuki QR Code generator library. The plugin makes no network request and collects no data.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Select a URL or some text in the editor, or leave the selection empty.</li>
+  <li>Run <b>QR Lifetime: Generate QR code</b> from <i>Find Action</i>, the <i>Tools</i> menu or the editor context menu.</li>
+  <li>If nothing was selected, type the URL or text in the dialog.</li>
+  <li>Choose <b>Insert SVG in the current file</b> or <b>Save as an SVG file in the project</b>. Saved files go to the <code>qr-codes</code> folder at the project root.</li>
+</ol>
+<p>The codes made by this plugin are static: the URL is written into the pattern itself, so they work forever but cannot be changed once printed. For QR codes whose destination you can edit later and that never expire, see <a href="https://qrlifetime.com">qrlifetime.com</a>.</p>
+]]></description>
+
+    <change-notes><![CDATA[
+<p>1.0.0: first release with the <b>Generate QR code</b> action.</p>
+]]></change-notes>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="QRLifetime" displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <action id="com.qrlifetime.qrcode.GenerateQrCode"
+                class="com.qrlifetime.qrcode.GenerateQrCodeAction"
+                text="QR Lifetime: Generate QR code"
+                description="Generate a QR code from the selected URL or text, as SVG"
+                icon="/icons/qrlifetime.svg">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
