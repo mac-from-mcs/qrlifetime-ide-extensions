@@ -1,0 +1,98 @@
+{
+  "name": "qrlifetime-qr-code",
+  "displayName": "QRLifetime QR Code Generator",
+  "description": "Generate a QR code from a URL or any text, offline, and insert it as SVG in your file or save it in your project.",
+  "version": "1.0.0",
+  "publisher": "qrlifetime",
+  "author": {
+    "name": "QRLifetime",
+    "url": "https://qrlifetime.com"
+  },
+  "license": "MIT",
+  "icon": "images/icon.png",
+  "homepage": "https://qrlifetime.com",
+  "bugs": {
+    "email": "hello@qrlifetime.com"
+  },
+  "keywords": [
+    "qr",
+    "qr code",
+    "qrcode",
+    "svg",
+    "generator"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "galleryBanner": {
+    "color": "#4F46E5",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "main": "./dist/extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "commands": [
+      {
+        "command": "qrlifetime.generateQrCode",
+        "title": "Generate QR code",
+        "category": "QR Lifetime"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "qrlifetime.generateQrCode",
+          "when": "editorHasSelection",
+          "group": "9_cutcopypaste@100"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "QR Lifetime",
+      "properties": {
+        "qrlifetime.errorCorrectionLevel": {
+          "type": "string",
+          "enum": [
+            "L",
+            "M",
+            "Q",
+            "H"
+          ],
+          "default": "M",
+          "description": "Error correction level of the generated QR code (L 7 %, M 15 %, Q 25 %, H 30 %)."
+        },
+        "qrlifetime.margin": {
+          "type": "number",
+          "default": 4,
+          "minimum": 0,
+          "description": "Quiet zone around the QR code, in modules."
+        },
+        "qrlifetime.outputFolder": {
+          "type": "string",
+          "default": "qr-codes",
+          "description": "Folder, relative to the workspace root, where saved SVG files are written."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "esbuild src/extension.ts --bundle --platform=node --format=cjs --target=node18 --external:vscode --outfile=dist/extension.js --minify",
+    "typecheck": "tsc --noEmit",
+    "package": "vsce package --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.0",
+    "@types/qrcode": "^1.5.5",
+    "@types/vscode": "^1.80.0",
+    "@vscode/vsce": "^3.6.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.6.0"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  }
+}
