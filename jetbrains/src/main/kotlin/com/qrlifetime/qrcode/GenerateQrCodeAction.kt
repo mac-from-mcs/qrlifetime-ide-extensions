@@ -8,7 +8,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.editor.Editor
-import com.intellij.openapi.fileEditor.FileEditorManager
+import com.intellij.openapi.fileEditor.OpenFileDescriptor
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.guessProjectDir
 import com.intellij.openapi.ui.InputValidator
@@ -90,7 +90,7 @@ class GenerateQrCodeAction : AnAction() {
             file = target
         })
         val saved = file ?: return
-        FileEditorManager.getInstance(project).openFile(saved, true)
+        OpenFileDescriptor(project, saved).navigate(true)
         NotificationGroupManager.getInstance()
             .getNotificationGroup("QRLifetime")
             .createNotification("QR code saved to $OUTPUT_FOLDER/${saved.name}", NotificationType.INFORMATION)
