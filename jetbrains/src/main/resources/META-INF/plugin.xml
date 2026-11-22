@@ -17,6 +17,7 @@
 ]]></description>
 
     <change-notes><![CDATA[
+<p>1.0.1: the saved SVG file is now opened through the navigation API instead of a deprecated file editor method. No change in behaviour.</p>
 <p>1.0.0: first release with the <b>Generate QR code</b> action.</p>
 ]]></change-notes>
 
